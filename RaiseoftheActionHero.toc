@@ -1,0 +1,13 @@
+## Interface: 110200
+## Version: 0.2
+## Title: Raise of the Action Hero
+## Author: Racklinc (aka JohnnyTarr:Shadowsong)
+## IconTexture: Interface\AddOns\RaiseoftheActionHero\rah_logo.tga
+## BindingsXml: bindings.xml
+## Notes: Keybind more, click less. Automate away holding down right click. Play WoW as an action RPG.
+## SavedVariablesPerCharacter: RahDoubleTapDefault, RahSmartEnable, RahCombatDefaultCBVal, RahMLMovingDefaultVal, RahMLStopMoving, RahMLMovingTimeDetect, RahMlInteractionEnable, RahMlInteractionTimeDetect, RahCylceTimeSetting, RahCFPrints, RahOverrideEnable_LM_CB, RahOverrideType_LM_DD_Var, RahOverWoWFunc_LM_DD_Var, RahLmOverMacro_Val, RahOverScript_LM, RahOverrideEnable_RM_CB, RahOverrideType_RM_DD_Var, RahOverWoWFunc_RM_DD_Var, RahRmOverMacro_Val, RahOverScript_RM, RahChatMessages, RahAllUnlock, RahMapUnlock, RahYakUnlock, RahBearUnlock, RahMammothUnlock, RahBrutoUnlock
+
+RAHSettings.lua
+RAHCommands.lua
+RAHMain.lua
+RAHSmartButtons.lua
