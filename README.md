@@ -24,3 +24,4 @@ Addon author Racklinc has set TSE to the TAB key.
 >Keybindings to use common items such as Healthstones, health potions, combat potions, trinkets.
 
 >Context of Accept Rez and cast a rez.
+# Raise-of-the-Action-Hero
