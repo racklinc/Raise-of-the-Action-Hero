@@ -28,5 +28,5 @@ Occasionally this add-on will force your character to auto-run. I don't believe 
 Some forms of game-originated teleporting may cause the the state of mouselook to report incorrectly, making smart features to not work. Teleporting in this context is entering a dungeon, being a passenger in a multi-person mount or vehicle and a position change happening, or leaving a phased area.
 >To fix this, disable and enable Smart Features with either the keybinding or "/rah smart off" followed by "/rah smart on"
 
-SmartButtons may cause interface errors.
->The intended function of the SmartButtons is to interact with interfaces such as quest NPCs, vendors, and the occasional confirmation dialog box. I haven't yet coded the add-on to not perform some actions to be prevented while in-combat, resulting in an illegal set of logic for in-combat to be allowed. To fix this, reload the UI and avoid using the SmartButtons while in combat.
+SmartButtons disabled during combat
+>The intended function of the SmartButtons is to interact with interfaces such as quest NPCs, vendors, and the occasional confirmation dialog box. Since most of these interactions should be done outside combat, the SmartButtons is disabled in-combat. This is to prevent potential interface errors caused by trying to run protected functions during comabt.
