@@ -5,7 +5,7 @@
 	<Binding name="RAHMLTEMPTOGGLE" category="Raise of the Action Hero: Mouselook" runOnUp="true">
 		RahMLTempToggle(keystate);
 	</Binding>
-	<Binding name="RAHSmartEnableTOGGLE" category="Raise of the Action Hero: Mouselook">
+	<Binding name="RAHSmartEnableTOGGLE" description="This includes auto-locking and auto-unlocking mouselook." category="Raise of the Action Hero: Mouselook">
 		RahSmartToggle();
 	</Binding>
 	<Binding name="SMARTBINDING1" category="Raise of the Action Hero: Smartbindings">

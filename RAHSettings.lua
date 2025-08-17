@@ -1,7 +1,7 @@
 --Bindings.xml labels
 BINDING_NAME_RAHMLTOGGLE = "Toggle mouse look."
-BINDING_NAME_RAHMLTEMPTOGGLE = "Temp toggle of mouse look. Holding inverts current setting, releasing returns to current setting."
-BINDING_NAME_RAHSmartEnableTOGGLE = "Enable or Disable smart features. Setting such as auto-locking mouselook or auto-unlocking mouselook."
+BINDING_NAME_RAHMLTEMPTOGGLE = "Temp toggle of mouse look."
+BINDING_NAME_RAHSmartEnableTOGGLE = "Enable or Disable smart features."
 BINDING_NAME_SMARTBINDING1 = "Smart Button 1"
 BINDING_NAME_SMARTBINDING2 = "Smart Button 2"
 BINDING_NAME_SMARTBINDING3 = "Smart Button 3"
