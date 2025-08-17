@@ -1,5 +1,5 @@
 ## Interface: 110200
-## Version: 0.2
+## Version: 1.0
 ## Title: Raise of the Action Hero
 ## Author: Racklinc (aka JohnnyTarr:Shadowsong)
 ## IconTexture: Interface\AddOns\RaiseoftheActionHero\rah_logo.tga
