@@ -342,7 +342,6 @@ RahPLayerInteraction:RegisterEvent("QUEST_COMPLETE")
 RahPLayerInteraction:RegisterEvent("BANKFRAME_OPENED")
 RahPLayerInteraction:RegisterEvent("AUCTION_HOUSE_SHOW")
 RahPLayerInteraction:RegisterEvent("GUILDBANKFRAME_OPENED")
-RahPLayerInteraction:RegisterEvent("BANKFRAME_OPENED")
 RahPLayerInteraction:RegisterEvent("TRAINER_SHOW")
 RahPLayerInteraction:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
 RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
@@ -364,7 +363,9 @@ RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 
 	local RahCiT = {["AUCTION_HOUSE_SHOW"] = "auction house", ["BANKFRAME_OPENED"] = "bank opened"
 		,["MAIL_SHOW"] = "mailbox", ["QUEST_GREETING"] = "quest npc", ["QUEST_FINISHED"] = "quest npc"
-		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc",["QUEST_PROGRESS"] = "quest progress"}
+		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc",["QUEST_PROGRESS"] = "quest progress"
+		,["CINEMATIC_START"] = "cinematic", ["GUILDBANKFRAME_OPENED"] = "guild bank opened", ["TRAINER_SHOW"] = "trainer"
+		,["PLAYER_INTERACTION_MANAGER_FRAME_SHOW"] = "player interaction"}
 	-- only unlocks if the smart features is checked
 	if (RahMlInteractionEnable == true and RahSmartEnable == true and IsMouselooking() == true) then
 		MouselookStop()
