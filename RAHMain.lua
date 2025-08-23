@@ -318,6 +318,12 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 				end
 			end
 
+			if LFGDungeonReadyDialogEnterDungeonButton then
+				if (LFGDungeonReadyDialogEnterDungeonButton:IsVisible() == true) then
+					RahSBBase("cf")
+				end
+			end
+
 		end--inside basic checks
 		RahTCFtimeElapsed = 0
 	end --inside onUpdate
@@ -358,7 +364,7 @@ RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 
 	local RahCiT = {["AUCTION_HOUSE_SHOW"] = "auction house", ["BANKFRAME_OPENED"] = "bank opened"
 		,["MAIL_SHOW"] = "mailbox", ["QUEST_GREETING"] = "quest npc", ["QUEST_FINISHED"] = "quest npc"
-		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc"}
+		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc",["QUEST_PROGRESS"] = "quest progress"}
 	-- only unlocks if the smart features is checked
 	if (RahMlInteractionEnable == true and RahSmartEnable == true and IsMouselooking() == true) then
 		MouselookStop()

@@ -130,7 +130,12 @@ function RahSBBase(RahSBBtnNumb)
 				print("  SB4: Sell All Junk Items.")
 			end
 		elseif (LFGDungeonReadyDialogEnterDungeonButton:IsVisible()) then
-			LFGDungeonReadyDialogEnterDungeonButton:Click()
+			if(RahSBBtnNumb == 1) then
+				LFGDungeonReadyDialogEnterDungeonButton:Click()
+			elseif(RahSBBtnNumb == "cf") then
+				print("RAH SmartButton detects: Enter Dungeon Pop-up")
+				print("  SB1: Enter dungeon.")
+			end
 		elseif (QuestMapFrame.DetailsFrame:IsVisible()) then
 			if (RahSBBtnNumb == 1) then
 				QuestMapFrame.DetailsFrame.AbandonButton:Click()

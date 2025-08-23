@@ -171,12 +171,15 @@ RahSvFrame:SetScript("OnEvent",function(self, event)
 	if(RahOverrideType_LM_DD_Var == "WoW function") then
 		RahOverWoWFunc_LM_DD_Frame:Show()
 		RahLmOverMacro_Frame:Hide()
+		RahLMMacroMsg:Hide()
 	elseif(RahOverrideType_LM_DD_Var == "MACRO") then
 		RahOverWoWFunc_LM_DD_Frame:Hide()
 		RahLmOverMacro_Frame:Show()
+		RahLMMacroMsg:Show()
 	else
 		RahOverWoWFunc_LM_DD_Frame:Hide()
 		RahLmOverMacro_Frame:Hide()
+		RahLMMacroMsg:Hide()
 	end
 	UIDropDownMenu_SetText(RahOverrideType_LM_DD_Frame,"Left Mouse Override type: " .. RahOverrideType_LM_DD_Var)
 	UIDropDownMenu_SetText(RahOverWoWFunc_LM_DD_Frame,"Override action: " .. RahOverWoWFunc_LM_DD_Var)
@@ -205,12 +208,15 @@ RahSvFrame:SetScript("OnEvent",function(self, event)
 	if(RahOverrideType_RM_DD_Var == "WoW function") then
 		RahOverWoWFunc_RM_DD_Frame:Show()
 		RahRmOverMacro_Frame:Hide()
+		RahRMMacroMsg:Hide()
 	elseif(RahOverrideType_RM_DD_Var == "MACRO") then
 		RahOverWoWFunc_RM_DD_Frame:Hide()
 		RahRmOverMacro_Frame:Show()
+		RahRMMacroMsg:Show()
 	else
 		RahOverWoWFunc_RM_DD_Frame:Hide()
 		RahRmOverMacro_Frame:Hide()
+		RahRMMacroMsg:Hide()
 	end
 	UIDropDownMenu_SetText(RahOverrideType_RM_DD_Frame,"Right Mouse Override type: " .. RahOverrideType_RM_DD_Var)
 	UIDropDownMenu_SetText(RahOverWoWFunc_RM_DD_Frame,"Override action: " .. RahOverWoWFunc_RM_DD_Var)
@@ -319,6 +325,9 @@ end)
 RahMLMovingDefaultStr:SetScript("OnShow", function()
 		RahMLMovingDefaultStr:SetText(RahMLMovingTimeDetect)
 end)
+local RahMLbyMovingHint = RahPanel:CreateFontString("RahMLbyMovingHint", "OVERLAY", "GameFontNormal");
+RahMLbyMovingHint:SetPoint("TOPLEFT",360,RahSetRow(4)-2)
+RahMLbyMovingHint:SetText("Put in a time value and press ENTER to save.")
 
 RahMLStopMovingCB = CreateFrame("CheckButton", "RahMLStopMoving_GlobalName", RahPanel, "ChatConfigCheckButtonTemplate")
 RahMLStopMovingCB:SetPoint("TOPLEFT", 75, RahSetRow(5))
@@ -337,7 +346,7 @@ end)
 RahMlInteractionDefaultCB = CreateFrame("CheckButton", "RahMlInteraction_GlobalName", RahPanel, "ChatConfigCheckButtonTemplate")
 RahMlInteractionDefaultCB:SetPoint("TOPLEFT", 50, RahSetRow(6))
 RahMlInteraction_GlobalNameText:SetFormattedText("Unlock mouselook by interacting.")
-RahMlInteractionDefaultCB.tooltip = "Unlock mouselook after a period of time for certain interactions. (ie: 0, 0.25, 1, 2)"
+RahMlInteractionDefaultCB.tooltip = "Unlock mouselook after a period of time for certain interactions. (ie: 0, 0.25, 1, 2) Press ENTER to save."
 RahMlInteractionDefaultCB:SetScript("OnClick", function()
 	if(RahMlInteractionEnable == true) then
 		RahMlInteractionDefault = 0
@@ -487,6 +496,7 @@ function RahOverLM_DDFunc_none()
 	UIDropDownMenu_SetText(RahOverrideType_LM_DD_Frame,"Left Mouse Override type: " .. RahOverrideType_LM_DD_Var)
 	RahOverWoWFunc_LM_DD_Frame:Hide()
 	RahLmOverMacro_Frame:Hide()
+	RahLMMacroMsg:Hide()
 	setRahOverScript_LM()
 end
 function RahOverLM_DDFunc_WoWFunc()
@@ -494,6 +504,7 @@ function RahOverLM_DDFunc_WoWFunc()
 	UIDropDownMenu_SetText(RahOverrideType_LM_DD_Frame,"Left Mouse Override type: " .. RahOverrideType_LM_DD_Var)
 	RahOverWoWFunc_LM_DD_Frame:Show()
 	RahLmOverMacro_Frame:Hide()
+	RahLMMacroMsg:Hide()
 	setRahOverScript_LM()
 end
 function RahOverLM_DDFunc_MACRO()
@@ -501,6 +512,7 @@ function RahOverLM_DDFunc_MACRO()
 	UIDropDownMenu_SetText(RahOverrideType_LM_DD_Frame,"Left Mouse Override type: " .. RahOverrideType_LM_DD_Var)
 	RahOverWoWFunc_LM_DD_Frame:Hide()
 	RahLmOverMacro_Frame:Show()
+	RahLMMacroMsg:Show()
 	setRahOverScript_LM()
 end
 --if LMB override is set to function, this drop down is show allowing a choice of predefined functions.. more to come in the future
@@ -571,7 +583,7 @@ end
 --if the LMB override dropdown type is set to macro then this input box allows setting the macro
 RahLmOverMacro_Frame = CreateFrame("EditBox", "RahLmOverMacro_Frame", RahPanel,"InputBoxTemplate")
 RahLmOverMacro_Frame:SetSize(100, 20)
-RahLmOverMacro_Frame:SetPoint("TOPLEFT", 105, RahSetRow(11))
+RahLmOverMacro_Frame:SetPoint("TOPLEFT", 105, RahSetRow(11)-7)
 RahLmOverMacro_Frame:SetFontObject("ChatFontNormal")
 RahLmOverMacro_Frame:SetMaxLetters(16)
 RahLmOverMacro_Frame:SetAutoFocus(false)
@@ -583,6 +595,10 @@ end)
 RahLmOverMacro_Frame:SetScript("OnShow", function()
 	RahLmOverMacro_Frame:SetText(RahLmOverMacro_Val)
 end)
+
+local RahLMMacroMsg = RahPanel:CreateFontString("RahLMMacroMsg", "OVERLAY", "GameFontNormal");
+RahLMMacroMsg:SetPoint("TOPLEFT",220,RahSetRow(11)-10)
+RahLMMacroMsg:SetText("Type in a macro name the press ENTER to save.")
 
 --function to actually set the choices from the previous sections for the LMB override into a script that can be interpreted
 function setRahOverScript_LM()
@@ -605,7 +621,7 @@ end
 --the next several sections control overriding the right mouse button when mouselook is engaged.
 --a checkbox used to enable or disable left mouse button (RMB) override
 RahOverrideEnable_RM_CBFrame = CreateFrame("CheckButton", "RahOverrideEnable_RM_CBFrame_GlobalName", RahPanel, "ChatConfigCheckButtonTemplate")
-RahOverrideEnable_RM_CBFrame:SetPoint("TOPLEFT", 10, RahSetRow(12))
+RahOverrideEnable_RM_CBFrame:SetPoint("TOPLEFT", 10, RahSetRow(12)-5)
 RahOverrideEnable_RM_CBFrame_GlobalNameText:SetFormattedText("Right mouse override.")
 RahOverrideEnable_RM_CBFrame.tooltip = "Set a right mouse button override while mouselooking."
 RahOverrideEnable_RM_CBFrame:SetScript("OnClick", function()
@@ -638,6 +654,7 @@ function RahOverRM_DDFunc_none()
 	UIDropDownMenu_SetText(RahOverrideType_RM_DD_Frame,"Right Mouse Override type: " .. RahOverrideType_RM_DD_Var)
 	RahOverWoWFunc_RM_DD_Frame:Hide()
 	RahRmOverMacro_Frame:Hide()
+	RahRMMacroMsg:Hide()
 	setRahOverScript_RM()
 end
 function RahOverRM_DDFunc_WoWFunc()
@@ -645,6 +662,7 @@ function RahOverRM_DDFunc_WoWFunc()
 	UIDropDownMenu_SetText(RahOverrideType_RM_DD_Frame,"Right Mouse Override type: " .. RahOverrideType_RM_DD_Var)
 	RahOverWoWFunc_RM_DD_Frame:Show()
 	RahRmOverMacro_Frame:Hide()
+	RahRMMacroMsg:Hide()
 	setRahOverScript_RM()
 end
 function RahOverRM_DDFunc_MACRO()
@@ -652,6 +670,7 @@ function RahOverRM_DDFunc_MACRO()
 	UIDropDownMenu_SetText(RahOverrideType_RM_DD_Frame,"Right Mouse Override type: " .. RahOverrideType_RM_DD_Var)
 	RahOverWoWFunc_RM_DD_Frame:Hide()
 	RahRmOverMacro_Frame:Show()
+	RahRMMacroMsg:Show()
 	setRahOverScript_RM()
 end
 --if RMB override is set to function, this drop down is show allowing a choice of predefined functions.. more to come in the future
@@ -722,7 +741,7 @@ end
 --if the RMB override dropdown type is set to macro then this input box allows setting the macro
 RahRmOverMacro_Frame = CreateFrame("EditBox", "RahRmOverMacro_Frame", RahPanel,"InputBoxTemplate")
 RahRmOverMacro_Frame:SetSize(100, 20)
-RahRmOverMacro_Frame:SetPoint("TOPLEFT", 105, RahSetRow(14))
+RahRmOverMacro_Frame:SetPoint("TOPLEFT", 105, RahSetRow(14)-7)
 RahRmOverMacro_Frame:SetFontObject("ChatFontNormal")
 RahRmOverMacro_Frame:SetMaxLetters(16)
 RahRmOverMacro_Frame:SetAutoFocus(false)
@@ -731,6 +750,11 @@ RahRmOverMacro_Frame:SetScript("OnEnterPressed", function()
 	print("Right mouse override macro '" ..RahRmOverMacro_Val.."' set." )
 	setRahOverScript_RM()
 end)
+
+local RahRMMacroMsg = RahPanel:CreateFontString("RahRMMacroMsg", "OVERLAY", "GameFontNormal");
+RahRMMacroMsg:SetPoint("TOPLEFT",220,RahSetRow(14)-10)
+RahRMMacroMsg:SetText("Type in a macro name the press ENTER to save.")
+
 --function to actually set the choices from the previous sections for the RMB override into a script that can be interpreted
 function setRahOverScript_RM()
 	if (InCombatLockdown() == false) then
@@ -753,8 +777,6 @@ RahRmOverMacro_Frame:SetScript("OnShow", function()
 	RahRmOverMacro_Frame:SetText(RahRmOverMacro_Val)
 end)
 
---title:SetPoint("TOPLEFT",10,RahSetRow(15))
---title:SetText("RAH: Chat Box Messages")
 local RahChatBoxMsgs = RahPanel:CreateFontString("RahKeyBindingReferenceText", "OVERLAY", "GameFontNormalLarge");
 RahChatBoxMsgs:SetPoint("TOPLEFT",10,RahSetRow(16))
 RahChatBoxMsgs:SetText("RAH: Chat Box Messages")
