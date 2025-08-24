@@ -78,6 +78,7 @@ function RahSBBase(RahSBBtnNumb)
 			local getGossActiveNumb = C_GossipInfo.GetNumActiveQuests()
 			local getGossAvailNumb = table.getn(C_GossipInfo.GetOptions())
 			local gossScroll = 0
+			local RahNoLower = 0
 			if (RahSBBtnNumb == "cf") then
 				print("RAH SmartButton detects: Gossip Frame")
 				print("  SmartButtons attempt to click them in the order they appear.")
@@ -89,14 +90,16 @@ function RahSBBase(RahSBBtnNumb)
 				if ((getGossAvailQuestsNumb > 0) and (RahSBBtnNumb <= getGossAvailQuestsNumb)) then
 					local AvailableOptions = C_GossipInfo.GetAvailableQuests()
 					C_GossipInfo.SelectAvailableQuest(AvailableOptions[RahSBBtnNumb].questID)
+					RahNoLower = 1
 				end
 				gossScroll = gossScroll + getGossAvailQuestsNumb
-				if ((getGossActiveNumb > 0) and (RahSBBtnNumb <= getGossActiveNumb+gossScroll)) then
+				if ((getGossActiveNumb > 0) and (RahSBBtnNumb <= getGossActiveNumb+gossScroll) and (RahNoLower == 0)) then
 					local ActiveOptions = C_GossipInfo.GetActiveQuests()
 					C_GossipInfo.SelectActiveQuest(ActiveOptions[RahSBBtnNumb-gossScroll].questID)
+					RahNoLower = 1
 				end
 				gossScroll = gossScroll + getGossActiveNumb
-				if (getGossAvailNumb > 0) then
+				if ((getGossAvailNumb > 0) and (RahNoLower == 0)) then
 					SelectGossipOption(RahSBBtnNumb-gossScroll)
 				end
 			end
