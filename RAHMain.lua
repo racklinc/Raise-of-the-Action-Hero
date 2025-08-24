@@ -318,12 +318,6 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 				end
 			end
 
-			if LFGDungeonReadyDialogEnterDungeonButton then
-				if (LFGDungeonReadyDialogEnterDungeonButton:IsVisible() == true) then
-					RahSBBase("cf")
-				end
-			end
-
 		end--inside basic checks
 		RahTCFtimeElapsed = 0
 	end --inside onUpdate
@@ -344,6 +338,8 @@ RahPLayerInteraction:RegisterEvent("AUCTION_HOUSE_SHOW")
 RahPLayerInteraction:RegisterEvent("GUILDBANKFRAME_OPENED")
 RahPLayerInteraction:RegisterEvent("TRAINER_SHOW")
 RahPLayerInteraction:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
+RahPLayerInteraction:RegisterEvent("LFG_PROPOSAL_SHOW")
+
 RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 
 	local type = ...
@@ -360,12 +356,12 @@ RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 	,"Professions Customer Order","Trait System","Barbers Choice","Jailers Tower Buffs","Major Faction Renown","Forge Master"
 	,"Character Banker","Account Banker","Profession Respec","PlaceholderType71","PlaceholderType72","PlaceholderType73","PlaceholderType74"
 	,"PlaceholderType75","PlaceholderType76","Guild Rename"}
-
+	--RegisterEvent Character Interaction Table https://warcraft.wiki.gg/wiki/Events
 	local RahCiT = {["AUCTION_HOUSE_SHOW"] = "auction house", ["BANKFRAME_OPENED"] = "bank opened"
 		,["MAIL_SHOW"] = "mailbox", ["QUEST_GREETING"] = "quest npc", ["QUEST_FINISHED"] = "quest npc"
 		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc",["QUEST_PROGRESS"] = "quest progress"
 		,["CINEMATIC_START"] = "cinematic", ["GUILDBANKFRAME_OPENED"] = "guild bank opened", ["TRAINER_SHOW"] = "trainer"
-		,["PLAYER_INTERACTION_MANAGER_FRAME_SHOW"] = "player interaction"}
+		,["PLAYER_INTERACTION_MANAGER_FRAME_SHOW"] = "player interaction",["LFG_PROPOSAL_SHOW"] = "Enter Dungeon prompt"}
 	-- only unlocks if the smart features is checked
 	if (RahMlInteractionEnable == true and RahSmartEnable == true and IsMouselooking() == true) then
 		MouselookStop()
