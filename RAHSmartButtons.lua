@@ -67,10 +67,12 @@ function RahSBBase(RahSBBtnNumb)
 					print("  Any SmartButton: Accept a quest.")
 					print("  Esc: Close Frame")
 				end
-				if RahQacN > 0 and RahSBBtnNumb <= RahQacN then
-					SelectActiveQuest(RahSBBtnNumb)
-				else
-					SelectAvailableQuest(RahSBBtnNumb-RahQacN)
+				if (RahSBBtnNumb ~= "cf") then
+					if ((RahQacN > 0) and (RahSBBtnNumb <= RahQacN)) then
+						SelectActiveQuest(RahSBBtnNumb)
+					else
+						SelectAvailableQuest(RahSBBtnNumb-RahQacN)
+					end
 				end
 			end
 		elseif (GossipFrame:IsVisible()) then
@@ -87,19 +89,19 @@ function RahSBBase(RahSBBtnNumb)
 				print("  Select an already accepted quest. \(For turn in or re-read quest text\).")
 				print("  Select gossip option")
 			else
-				if ((getGossAvailQuestsNumb > 0) and (RahSBBtnNumb <= getGossAvailQuestsNumb)) then
+				if ((getGossAvailQuestsNumb > 0) and (RahSBBtnNumb <= getGossAvailQuestsNumb) and (RahSBBtnNumb ~= "cf")) then
 					local AvailableOptions = C_GossipInfo.GetAvailableQuests()
 					C_GossipInfo.SelectAvailableQuest(AvailableOptions[RahSBBtnNumb].questID)
 					RahNoLower = 1
 				end
 				gossScroll = gossScroll + getGossAvailQuestsNumb
-				if ((getGossActiveNumb > 0) and (RahSBBtnNumb <= getGossActiveNumb+gossScroll) and (RahNoLower == 0)) then
+				if ((getGossActiveNumb > 0) and (RahSBBtnNumb <= getGossActiveNumb+gossScroll) and (RahNoLower == 0) and (RahSBBtnNumb ~= "cf")) then
 					local ActiveOptions = C_GossipInfo.GetActiveQuests()
 					C_GossipInfo.SelectActiveQuest(ActiveOptions[RahSBBtnNumb-gossScroll].questID)
 					RahNoLower = 1
 				end
 				gossScroll = gossScroll + getGossActiveNumb
-				if ((getGossAvailNumb > 0) and (RahNoLower == 0)) then
+				if ((getGossAvailNumb > 0) and (RahNoLower == 0) and (RahSBBtnNumb ~= "cf")) then
 					SelectGossipOption(RahSBBtnNumb-gossScroll)
 				end
 			end
