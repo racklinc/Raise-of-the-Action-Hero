@@ -1,9 +1,3 @@
-local btn = CreateFrame("Button", "myButton", UIParent, "SecureActionButtonTemplate")
-btn:SetAttribute("type", "action")
-btn:SetAttribute("action", 1)
-btn:RegisterForClicks("AnyUp", "AnyDown")
-
-
 function RahSBBase(RahSBBtnNumb)
 	if (UnitAffectingCombat("player") == false) then
 		local RahNumLootItems = GetNumLootItems()
