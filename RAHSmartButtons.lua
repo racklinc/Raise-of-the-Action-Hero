@@ -1,13 +1,20 @@
+local btn = CreateFrame("Button", "myButton", UIParent, "SecureActionButtonTemplate")
+btn:SetAttribute("type", "action")
+btn:SetAttribute("action", 1)
+btn:RegisterForClicks("AnyUp", "AnyDown")
+
+
 function RahSBBase(RahSBBtnNumb)
 	if (UnitAffectingCombat("player") == false) then
 		local RahNumLootItems = GetNumLootItems()
 		if (StaticPopup1Button1:IsVisible()) then
-			if C_PartyInfo.IsDelveInProgress() then
+			local RahIsSpecialPopup = (StaticPopup1Text:GetText())
+			if C_PartyInfo.IsDelveInProgress() and string.find(RahIsSpecialPopup, "delve") then
 				if (RahSBBtnNumb == "cf") then
 					print("RAH SmartButton detects: Exit Delve.")
-					print("SB1: Click \"Yes\"")
-					print("SB2: Click \"No\"")
-					print("Esc: \"No\"")
+					print("     SB1: Click \"Yes\"")
+					print("     SB2: Click \"No\"")
+					print("     Esc: \"No\"")
 				end
 				if (RahSBBtnNumb == 1 and UnitAffectingCombat("player") == false) then
 					C_PartyInfo.DelveTeleportOut()
@@ -18,10 +25,10 @@ function RahSBBase(RahSBBtnNumb)
 				elseif (RahSBBtnNumb == 2) then
 					StaticPopup1Button2:Click()
 				elseif (RahSBBtnNumb == "cf") then
-					print("RAH SmartButton detects: StaticPop.")
-					print("SB1: Click \"Yes\"")
-					print("SB2: Click \"No\"")
-					print("Esc: \"No\"")
+					print("RAH SmartButton detects: StaticPopup. \nNote StaticPopup may ignore SmartButtons in some circumstances.")
+					print("     SB1: Click \"Yes\"")
+					print("     SB2: Click \"No\"")
+					print("     Esc: \"No\"")
 				end
 			end
 		elseif (QuestFrame:IsVisible()) then
@@ -183,40 +190,67 @@ function RahSBBase(RahSBBtnNumb)
 		elseif (GroupLootHistoryFrame.ClosePanelButton:IsVisible()) then
 			GroupLootHistoryFrame.ClosePanelButton:Click()
 		else
-			if DelvesDifficultyPickerFrame ~= nil then
-				if DelvesDifficultyPickerFrame:IsVisible() == true then
-					if (RahSBBtnNumb == "cf") then
-						print("  SB1: Enter delve with default selection.")
-					end
-					if DelvesDifficultyPickerFrame.EnterDelveButton:IsVisible() then
-						if (RahSBBtnNumb == 1) then
-							DelvesDifficultyPickerFrame.EnterDelveButton:Click()
-						end
-					end
+			if (DelvesDifficultyPickerFrame and DelvesDifficultyPickerFrame:IsVisible()) then
+				if (RahSBBtnNumb == "cf") then
+					print("  SB1: Enter delve with default selection.")
+				elseif (RahSBBtnNumb == 1) then
+					DelvesDifficultyPickerFrame.EnterDelveButton:Click()
 				end
-			elseif AdventureMapQuestChoiceDialog ~= nil then
-				if (AdventureMapQuestChoiceDialog:IsVisible() == true) then
-					AdventureMapQuestChoiceDialog.AcceptButton:Click()
-				end
-			elseif (PlayerChoiceFrame ~= nil and UnitAffectingCombat("player") == false) then
+			elseif AdventureMapQuestChoiceDialog and AdventureMapQuestChoiceDialog:IsVisible() then
+				AdventureMapQuestChoiceDialog.AcceptButton:Click()
+			elseif (PlayerChoiceFrame and PlayerChoiceFrame:IsVisible()) then
 				local children = {PlayerChoiceFrame:GetChildren()}
 				for i, child in ipairs(children) do
-					if i > 7 then
-						local RahPCFChilren = {child:GetChildren()}
-						for i2, child2 in ipairs(RahPCFChilren) do
-							if i2 == 2 then
-								local rahPCFButtonTab = {child2:GetChildren()}
-								for i3, child3 in ipairs(rahPCFButtonTab) do
-									local rahPCFButtonSubTab = {child3:GetChildren()}
-									for i4, child4 in ipairs(rahPCFButtonSubTab) do
-										if (RahSBBtnNumb == 1) then
-											if i == 8 then child4:Click()	end
-										elseif (RahSBBtnNumb == 2) then
-											if i == 9 then child4:Click() end
-										elseif (RahSBBtnNumb == 3) then
-											if i == 10 then child4:Click() end
-										elseif (RahSBBtnNumb == 4) then
-											if i == 11 then child4:Click() end
+					if i >= 8 then
+						local headerText = child.Header.Text:GetText()
+						if RahSBBtnNumb == 1 and headerText == RahPCFSB[1] then
+							local RahPCFChilren1 = {child:GetChildren()}
+							for i2, child2 in ipairs(RahPCFChilren1) do
+								if i2 == 2 then
+									local RahPCFChilren3 = {child2:GetChildren()}
+									for i3, child3 in ipairs(RahPCFChilren3) do
+										local RahPCFChilren4 = {child3:GetChildren()}
+										for i4, child4 in ipairs(RahPCFChilren4) do
+											child4:Click()
+										end
+									end
+								end
+							end
+						elseif RahSBBtnNumb == 2 and headerText == RahPCFSB[2] then
+							local RahPCFChilren1 = {child:GetChildren()}
+							for i2, child2 in ipairs(RahPCFChilren1) do
+								if i2 == 2 then
+									local RahPCFChilren3 = {child2:GetChildren()}
+									for i3, child3 in ipairs(RahPCFChilren3) do
+										local RahPCFChilren4 = {child3:GetChildren()}
+										for i4, child4 in ipairs(RahPCFChilren4) do
+											child4:Click()
+										end
+									end
+								end
+							end
+						elseif RahSBBtnNumb == 3 and headerText == RahPCFSB[3] then
+							local RahPCFChilren1 = {child:GetChildren()}
+							for i2, child2 in ipairs(RahPCFChilren1) do
+								if i2 == 2 then
+									local RahPCFChilren3 = {child2:GetChildren()}
+									for i3, child3 in ipairs(RahPCFChilren3) do
+										local RahPCFChilren4 = {child3:GetChildren()}
+										for i4, child4 in ipairs(RahPCFChilren4) do
+											child4:Click()
+										end
+									end
+								end
+							end
+						elseif RahSBBtnNumb == 4 and headerText == RahPCFSB[4] then
+							local RahPCFChilren1 = {child:GetChildren()}
+							for i2, child2 in ipairs(RahPCFChilren1) do
+								if i2 == 2 then
+									local RahPCFChilren3 = {child2:GetChildren()}
+									for i3, child3 in ipairs(RahPCFChilren3) do
+										local RahPCFChilren4 = {child3:GetChildren()}
+										for i4, child4 in ipairs(RahPCFChilren4) do
+											child4:Click()
 										end
 									end
 								end
@@ -224,6 +258,10 @@ function RahSBBase(RahSBBtnNumb)
 						end
 					end
 				end
+			elseif (GenericPlayerChoiceToggleButton and GenericPlayerChoiceToggleButton:IsVisible()) then
+				GenericPlayerChoiceToggleButton:Click()
+			elseif (TorghastPlayerChoiceToggleButton and TorghastPlayerChoiceToggleButton:IsVisible()) then
+				TorghastPlayerChoiceToggleButton:Click()
 			end
 		end
 	else

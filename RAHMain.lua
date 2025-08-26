@@ -16,6 +16,12 @@ local RahFisMLLooking = false
 local RahisFlying = false
 local RahMlInteractionTime = 0
 local RahisInCine = 0
+local RahPCFbeenShown = 0
+RahPCFSB = {}
+RahPCFSB[1] = ""
+RahPCFSB[2] = ""
+RahPCFSB[3] = ""
+RahPCFSB[4] = ""
 
 --disable any functions but toggling
 function RahSmartDisableFunc()
@@ -285,28 +291,28 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 			--unlock when Macro frame is open
 			if MacroFrame then
 				if (MacroFrame:IsVisible() == true) then
-					RahMLToggle()
+					MouselookStop()
 					RahPrintMsg("unlocking", "editing macro")
 				end
 			end
 			--unlock when settings frame is open
 			if SettingsPanel then
 				if (SettingsPanel:IsVisible() == true) then
-					RahMLToggle()
+					MouselookStop()
 					RahPrintMsg("unlocking", "Settings Panel is open.")
 				end
 			end
 			--unlock when Weak Auras Options frame is open
 			if WeakAurasOptions then
 				if (WeakAurasOptions:IsVisible() == true) then
-					RahMLToggle()
+					MouselookStop()
 					RahPrintMsg("unlocking", "Weak Auras Options is open.")
 				end
 			end
 			--unlock when DBM_GUI_OptionsFrame frame is open
 			if DBM_GUI_OptionsFrame then
 				if (DBM_GUI_OptionsFrame:IsVisible() == true) then
-					RahMLToggle()
+					MouselookStop()
 					RahPrintMsg("unlocking", "DBM Options is open.")
 				end
 			end
@@ -318,7 +324,41 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 				end
 			end
 
+			if StaticPopup1Button1 then
+				if StaticPopup1Button1:IsVisible() then
+					MouselookStop()
+					RahPrintMsg("unlocking", "Confirmation Pop-up")
+					RahSBBase("cf")
+				end
+			end
+
 		end--inside basic checks
+		if (PlayerChoiceFrame and PlayerChoiceFrame:IsVisible() and RahPCFbeenShown == 0) then
+			print("RAH detects player choice frame.")
+			print("     Careful selections might not match the order in frame.")
+			local children = {PlayerChoiceFrame:GetChildren()}
+			RahCurrSB = 1
+			for i, child in ipairs(children) do
+				if i >= 8 then
+					local headerText = child.Header.Text:GetText()
+					if child.Header.Text:IsVisible() then
+						print("SB"..RahCurrSB..": "..headerText)
+						RahPCFSB[RahCurrSB] = headerText
+						RahCurrSB = RahCurrSB + 1
+					end
+				end
+			end
+			RahPCFbeenShown = 1
+		elseif (RahPCFbeenShown == 1) then
+			if (not (PlayerChoiceFrame) or not (PlayerChoiceFrame:IsVisible()))  then
+				RahPCFbeenShown = 0
+				RahCurrSB = 1
+				RahPCFSB[1] = ""
+				RahPCFSB[2] = ""
+				RahPCFSB[3] = ""
+				RahPCFSB[4] = ""
+			end
+		end
 		RahTCFtimeElapsed = 0
 	end --inside onUpdate
 end) -- bottom of main frame
