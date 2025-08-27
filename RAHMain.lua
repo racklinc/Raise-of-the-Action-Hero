@@ -22,6 +22,7 @@ RahPCFSB[1] = ""
 RahPCFSB[2] = ""
 RahPCFSB[3] = ""
 RahPCFSB[4] = ""
+local RahChatMessagesSpam = 0
 
 --disable any functions but toggling
 function RahSmartDisableFunc()
@@ -89,9 +90,12 @@ function RahMLTempToggle(Rahkeystate)
 	end
 end
 
-function RahPrintMsg(typeAction,message)
+function RahPrintMsg(typeAction,message,isCF)
 	if (RahCFPrints == true) then
 		print("RAH "..typeAction.." mouse: "..message)
+		if isCF then
+			RahSBBase("cf")
+		end
 	end
 end
 
@@ -327,8 +331,7 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 			if StaticPopup1Button1 then
 				if StaticPopup1Button1:IsVisible() then
 					MouselookStop()
-					RahPrintMsg("unlocking", "Confirmation Pop-up")
-					RahSBBase("cf")
+					RahPrintMsg("unlocking", "Confirmation Pop-up",1)
 				end
 			end
 
@@ -379,6 +382,8 @@ RahPLayerInteraction:RegisterEvent("GUILDBANKFRAME_OPENED")
 RahPLayerInteraction:RegisterEvent("TRAINER_SHOW")
 RahPLayerInteraction:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
 RahPLayerInteraction:RegisterEvent("LFG_PROPOSAL_SHOW")
+RahPLayerInteraction:RegisterEvent("QUEST_LOG_UPDATE")
+RahPLayerInteraction:RegisterEvent("QUEST_DETAIL")
 
 RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 
@@ -401,17 +406,21 @@ RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 		,["MAIL_SHOW"] = "mailbox", ["QUEST_GREETING"] = "quest npc", ["QUEST_FINISHED"] = "quest npc"
 		,["QUEST_DETAIL"] = "quest npc", ["QUEST_COMPLETE"] = "quest npc",["QUEST_PROGRESS"] = "quest progress"
 		,["CINEMATIC_START"] = "cinematic", ["GUILDBANKFRAME_OPENED"] = "guild bank opened", ["TRAINER_SHOW"] = "trainer"
-		,["PLAYER_INTERACTION_MANAGER_FRAME_SHOW"] = "player interaction",["LFG_PROPOSAL_SHOW"] = "Enter Dungeon prompt"}
+		,["PLAYER_INTERACTION_MANAGER_FRAME_SHOW"] = "player interaction",["LFG_PROPOSAL_SHOW"] = "Enter Dungeon prompt"
+		,["QUEST_LOG_UPDATE"] = "Quest Details", ["QUEST_DETAIL"] = "Quest Details"}
 	-- only unlocks if the smart features is checked
 	if (RahMlInteractionEnable == true and RahSmartEnable == true and IsMouselooking() == true) then
 		MouselookStop()
-		if (event == "PLAYER_INTERACTION_MANAGER_FRAME_SHOW") then
-			RahPrintMsg("unlocking", RahPimTable[type])
-		else
-			RahPrintMsg("unlocking",RahCiT[event])
+		local currentTime = GetTime()
+		if (currentTime - RahChatMessagesSpam) > 1 then
+			if (RahChatMessages == true) then
+				if (event == "PLAYER_INTERACTION_MANAGER_FRAME_SHOW") then
+					RahPrintMsg("unlocking", RahPimTable[type],1)
+				else
+					RahPrintMsg("unlocking",RahCiT[event],1)
+				end
+			end
 		end
-	end
-	if (RahChatMessages == true) then
-		RahSBBase("cf")
+		RahChatMessagesSpam = currentTime
 	end
 end)

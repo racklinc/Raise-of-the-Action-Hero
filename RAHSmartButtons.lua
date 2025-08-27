@@ -149,6 +149,11 @@ function RahSBBase(RahSBBtnNumb)
 				QuestMapFrame.DetailsFrame.ShareButton:Click()
 			elseif (RahSBBtnNumb == 3) then
 				QuestMapFrame.DetailsFrame.TrackButton:Click()
+			elseif (RahSBBtnNumb == "cf") then
+				print("RAH SmartButton detects: Quest Log")
+				print("     SB1: Abandon Quest")
+				print("     SB2: Share Quest")
+				print("     SB3 Track Quest")
 			end
 		elseif (LFDRoleCheckPopup:IsVisible()) then
 			if (RahSBBtnNumb == 1) then
