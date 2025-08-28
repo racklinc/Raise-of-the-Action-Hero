@@ -382,8 +382,8 @@ RahPLayerInteraction:RegisterEvent("GUILDBANKFRAME_OPENED")
 RahPLayerInteraction:RegisterEvent("TRAINER_SHOW")
 RahPLayerInteraction:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW")
 RahPLayerInteraction:RegisterEvent("LFG_PROPOSAL_SHOW")
-RahPLayerInteraction:RegisterEvent("QUEST_LOG_UPDATE")
-RahPLayerInteraction:RegisterEvent("QUEST_DETAIL")
+--RahPLayerInteraction:RegisterEvent("QUEST_LOG_UPDATE")
+--RahPLayerInteraction:RegisterEvent("QUEST_DETAIL")
 
 RahPLayerInteraction:SetScript("OnEvent",function(self, event,...)
 
