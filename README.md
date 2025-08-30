@@ -1,4 +1,4 @@
-# Raise of the Action Hero
+# Rise of the Action Hero
 ### Keybind more, click less. Make WoW more like an action RPG.
 
 Automate away holding down right click, intelligently lock or unlock mouselook, and use smartbuttons that understand the context of many interactions.
@@ -7,11 +7,11 @@ Basic Configuration
 
     /rah options
 
-Options to configure the add-no can be brought up using /rah options or Game Menu > Options > AddOns > Raise of the Action Hero
+Options to configure the add-no can be brought up using /rah options or Game Menu > Options > AddOns > Rise of the Action Hero
 
 Several of this addons features are done through the keybindings menu.
 
-  * From the games Main Menu GoTo Keybindings -> Addons -> Raise of the Action Hero and set keybindings there.
+  * From the games Main Menu GoTo Keybindings -> Addons -> Rise of the Action Hero and set keybindings there.
 
 ### Features
   * Temp toggle (keypress down) of mouselook state

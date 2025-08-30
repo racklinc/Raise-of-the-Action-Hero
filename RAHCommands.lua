@@ -8,7 +8,7 @@ local function RahCommands(msg, editbox)
 	elseif msg == '?' then
 		RahSBBase("cf")
 	elseif msg == "options" then
-		Settings.OpenToCategory("Raise of the Action Hero")
+		Settings.OpenToCategory("Rise of the Action Hero")
 	elseif msg == 'doubletap on' then
 		RahDoubleTapDefault = true
 		RahDoubleTapDefaultCB:SetChecked(true)

@@ -246,8 +246,8 @@ end
 --widgets in this section are meant to control smart features of mouselook
 local category, layout
 RahPanel = CreateFrame("Frame", "OptionsPanel")
-OptionsPanel.name = "Raise of the Action Hero"
-RahPanel.name = "Raise of the Action Hero"
+OptionsPanel.name = "Rise of the Action Hero"
+RahPanel.name = "Rise of the Action Hero"
 category, layout = Settings.RegisterCanvasLayoutCategory(RahPanel, RahPanel.name, RahPanel.name);
 category.ID = RahPanel.name
 Settings.RegisterAddOnCategory(category);
