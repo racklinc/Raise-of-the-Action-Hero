@@ -343,11 +343,13 @@ RahTrickyFrames:HookScript("OnUpdate", function(self, elapsed)
 			RahCurrSB = 1
 			for i, child in ipairs(children) do
 				if i >= 8 then
-					local headerText = child.Header.Text:GetText()
-					if child.Header.Text:IsVisible() then
-						print("SB"..RahCurrSB..": "..headerText)
-						RahPCFSB[RahCurrSB] = headerText
-						RahCurrSB = RahCurrSB + 1
+					if child.Header.Text then
+						local headerText = child.Header.Text:GetText()
+						if child.Header.Text:IsVisible() then
+							print("SB"..RahCurrSB..": "..headerText)
+							RahPCFSB[RahCurrSB] = headerText
+							RahCurrSB = RahCurrSB + 1
+						end
 					end
 				end
 			end
